@@ -34,7 +34,7 @@ module tt_um_8bitcustomcomputer (
 	wire [7:0] out_display;
 	assign uio_out = out_display;
 
-	wire enter_data ;
+	wire [7:0] enter_data ;
 	assign enter_data = uio_in ;
 	
     wire [3:0] ram_addr;
