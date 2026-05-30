@@ -203,7 +203,7 @@ module cpu_core(
         if (CO) begin  
             bus_mux = pc_bus_ext;
         end else if (IO) begin
-            bus_mux = ir_bus_out;
+            bus_mux = {4'b0000,ir_bus_out};
         end else if (ALO) begin
             bus_mux = alu_out;
         end else if (AO) begin

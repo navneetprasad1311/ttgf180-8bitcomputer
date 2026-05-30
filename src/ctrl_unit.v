@@ -97,6 +97,7 @@ always @(*) begin
                     ctrl_wd[OI]=1;
                 end
                 OP_HLT: ctrl_wd[HLT]=1;
+                default: ctrl_wd = 19'b0;
             endcase
         end
         4: begin
@@ -128,6 +129,7 @@ always @(*) begin
                     ctrl_wd[IO]=1;
                     ctrl_wd[MI]=1;
                 end
+                default: ctrl_wd = 19'b0;
             endcase
         end
         5: begin
@@ -160,6 +162,7 @@ always @(*) begin
                     ctrl_wd[AI]=1;
 					ctrl_wd[RI]=1;
 				end
+                default: ctrl_wd = 19'b0;
             endcase
         end
     endcase
