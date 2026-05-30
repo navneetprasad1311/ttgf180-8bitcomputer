@@ -45,7 +45,7 @@ The current program counter value, halt status, and input request status are ava
 
 ### Programming Mode
 
-Set `prog_mode = 1`.
+Set `prog_mode = 1` - `ui_in[0] = 1`
 
 1. Place the RAM address on `ui_in[7:4]`.
 2. Assert `load_ram` using `ui_in[3]`.
@@ -54,7 +54,7 @@ Set `prog_mode = 1`.
 
 ### Run Mode
 
-Set `prog_mode = 0`.
+Set `prog_mode = 0` - `ui_in[0] = 1`
 
 1. Assert the `start` signal using `ui_in[1]`.
 2. The processor begins executing instructions from address 0.
