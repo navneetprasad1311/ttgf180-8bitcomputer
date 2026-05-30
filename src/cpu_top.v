@@ -29,7 +29,7 @@ module tt_um_8bitcustomcomputer (
 	wire prog_mode;
 	assign prog_mode = ui_in [0] ;
 
-	assign uio_oe = (prog_mode) ? 8'd1 : 8'd0;  // SELF CONTROLLED
+	assign uio_oe = (prog_mode) ? 8'hFF : 8'h00;  // SELF CONTROLLED
 
 	wire [7:0] out_display;
 	assign uio_out = out_display;
