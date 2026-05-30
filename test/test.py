@@ -7,20 +7,29 @@ from cocotb.triggers import ClockCycles
 
 
 async def load_mem(dut, addr, data):
+    """
+    Load one byte into RAM
 
-    # prog_mode = 1
-    dut.ui_in.value = (addr << 4) | 0x01
+    ui[0] = prog_mode
+    ui[3] = load_ram
+    ui[7:4] = address
+    uio_in = data
+    """
 
+    base = (addr << 4) | 0x01
+
+    dut.ui_in.value = base
     dut.uio_in.value = data
 
     # load_ram pulse
-    dut.ui_in.value |= (1 << 3)
+    dut.ui_in.value = base | (1 << 3)
 
     await ClockCycles(dut.clk, 1)
 
-    dut.ui_in.value &= ~(1 << 3)
+    dut.ui_in.value = base
 
     await ClockCycles(dut.clk, 1)
+
 
 @cocotb.test()
 async def test_project(dut):
@@ -31,13 +40,17 @@ async def test_project(dut):
     clock = Clock(dut.clk, 10, unit="us")
     cocotb.start_soon(clock.start())
 
-    # ------------------------------------
-    # Reset
-    # ------------------------------------
+    # -------------------------
+    # Initial state
+    # -------------------------
 
     dut.ena.value = 1
     dut.ui_in.value = 0
     dut.uio_in.value = 0
+
+    # -------------------------
+    # Reset
+    # -------------------------
 
     dut.rst_n.value = 0
 
@@ -47,11 +60,11 @@ async def test_project(dut):
 
     await ClockCycles(dut.clk, 5)
 
-    dut._log.info("Loading Program")
+    dut._log.info("Loading Fibonacci Program")
 
-    # ------------------------------------
+    # -------------------------
     # Fibonacci Program
-    # ------------------------------------
+    # -------------------------
 
     await load_mem(dut, 0, 0b01010000)   # LDI 0
     await load_mem(dut, 1, 0b01001110)   # STA 14
@@ -76,58 +89,77 @@ async def test_project(dut):
 
     dut._log.info("Program Loaded")
 
-    # ------------------------------------
-    # Start CPU
-    # ------------------------------------
+    # -------------------------
+    # Exit programming mode
+    # -------------------------
 
-    dut.ui_in.value |= (1 << 1)
+    dut.ui_in.value = 0
+
+    await ClockCycles(dut.clk, 5)
+
+    # -------------------------
+    # START pulse
+    # -------------------------
+
+    dut.ui_in.value = (1 << 1)
 
     await ClockCycles(dut.clk, 2)
 
-    dut.ui_in.value &= ~(1 << 1)
+    dut.ui_in.value = 0
 
     dut._log.info("CPU Started")
 
-    # ------------------------------------
-    # Execution Loop
-    # ------------------------------------
+    # -------------------------
+    # Execute
+    # -------------------------
 
     halted = False
 
-    for cycle in range(800):
+    for cycle in range(1000):
 
         await ClockCycles(dut.clk, 1)
 
-        uo = dut.uo_out.value.integer
+        uo = int(dut.uo_out.value)
 
-        hlt = (uo >> 6) & 1
         inp_req = (uo >> 7) & 1
-
+        hlt = (uo >> 6) & 1
         pc = (uo >> 2) & 0xF
 
-        if cycle % 10 == 0:
+        if cycle % 20 == 0:
             dut._log.info(
-                f"Cycle={cycle}  PC={pc:X}  HLT={hlt}  INP_REQ={inp_req}"
+                f"Cycle={cycle:04d}  PC={pc:X}  HLT={hlt}  INP_REQ={inp_req}"
             )
 
-        # Optional input support
+        # -------------------------
+        # Handle input requests
+        # -------------------------
+
         if inp_req:
 
             dut._log.info("Input requested")
 
             dut.uio_in.value = 0x05
 
-            dut.ui_in.value |= (1 << 2)
+            dut.ui_in.value = (1 << 2)
 
             await ClockCycles(dut.clk, 1)
 
-            dut.ui_in.value &= ~(1 << 2)
+            dut.ui_in.value = 0
+
+        # -------------------------
+        # Halt detection
+        # -------------------------
 
         if hlt:
+
             halted = True
-            dut._log.info("CPU Halted")
+
+            dut._log.info(
+                f"CPU halted after {cycle} cycles"
+            )
+
             break
 
     assert halted, "CPU never reached HLT instruction"
 
-    dut._log.info("Test Completed Successfully")
+    dut._log.info("Simulation completed successfully")
