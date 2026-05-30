@@ -49,7 +49,7 @@ module tt_um_8bitcustomcomputer (
 	wire halt;
 	assign uo_out[6] = halt;
 	
-	wire pc_disp;
+	wire [3:0] pc_disp;
 	assign uo_out[5:2] = pc_disp; 
 	
 	assign uo_out [1:0] = 2'd0;
