@@ -48,7 +48,6 @@ module cpu_core(
     wire zero_flag,zout;
     wire [7:0] a_alu_in, b_alu_in ,data_out;
     wire [3:0] mar_addr;
-    wire [7:0] ram_bus_io;
     wire [3:0] ir_bus_out;
     wire [3:0] opcode;
     wire [7:0] a_bus_out;
