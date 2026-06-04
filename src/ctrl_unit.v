@@ -31,6 +31,10 @@ always @(posedge clk or negedge reset) begin
         halt<=0;
         inp_req<=0;
         inp_wait<=0;
+        prev <=0;
+        cur <= 0;
+        prev_in <= 0; 
+        cur_in <= 0;
     end
     else begin
     prev <= cur;
