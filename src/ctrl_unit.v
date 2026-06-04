@@ -18,6 +18,12 @@ reg [2:0] stage;
 reg running;
 reg halt;
 reg inp_wait;
+reg prev,cur;
+wire pe_st ;
+assign pe_st = ~prev & cur;
+wire pe_inp;
+reg prev_in, cur_in;
+assign pe_inp = ~prev_in & cur_in;
 always @(posedge clk or negedge reset) begin
     if(!reset) begin
         stage<=0;
@@ -26,13 +32,18 @@ always @(posedge clk or negedge reset) begin
         inp_req<=0;
         inp_wait<=0;
     end
-    else if(start && !running && !halt) begin
+    else begin
+    prev <= cur;
+    cur <= start;
+    cur_in <= inp_loaded;
+    prev_in <= cur_in;
+    if(pe_st && !running && !halt && !inp_wait) begin
         running<=1;
         stage<=0;
     end
     else if(inp_wait) begin
         inp_req<=1;
-        if(inp_loaded) begin
+        if(pe_inp ) begin
             inp_wait<=0;
             inp_req<=0;
             running<=1;
@@ -48,8 +59,9 @@ always @(posedge clk or negedge reset) begin
             running<=0;
             halt<=1;
         end
-        else if(stage==5) stage<=0;
+        else if(((opcode!=OP_INP)&&stage==5)||stage==6) stage<=0;
         else stage<=stage+1;
+    end
     end
 end
 always @(*) begin
@@ -126,8 +138,8 @@ always @(*) begin
                     ctrl_wd[AI]=1;
                 end
                 OP_INP: begin
-                    ctrl_wd[IO]=1;
-                    ctrl_wd[MI]=1;
+                    ctrl_wd[INP]=1;
+                    ctrl_wd[AI]=1;
                 end
                 default: ctrl_wd = 19'b0;
             endcase
@@ -157,15 +169,20 @@ always @(*) begin
                     ctrl_wd[FE]=1;
                     ctrl_wd[AI]=1;
                 end
-				OP_INP: begin
-                    ctrl_wd[INP]=1;
-                    ctrl_wd[AI]=1;
-					ctrl_wd[RI]=1;
-				end
+                OP_INP: begin
+                    ctrl_wd[IO]=1;
+                    ctrl_wd[MI]=1;
+                end
                 default: ctrl_wd = 19'b0;
             endcase
+        end
+        6: begin
+            if(opcode == OP_INP) begin
+                ctrl_wd[AO]=1;
+                ctrl_wd[RI]=1;
+            end
+            else ctrl_wd = 19'b0;
         end
     endcase
 end
 assign out=ctrl_wd;
-endmodule
