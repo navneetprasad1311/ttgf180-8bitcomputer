@@ -124,7 +124,6 @@ Before programming or running the CPU:
 - Use a **6 Hz clock** so execution can be observed easily.
 - Ensure the CPU is not running while loading RAM (`prog_mode = 0`).
 
----
 
 ### 1. Program the RAM
 
@@ -141,7 +140,6 @@ For each instruction:
 3. Pulse `load_ram` (`ui_in[3]`) high for one clock cycle.
 4. Repeat until the entire program has been loaded.
 
----
 
 ### Example Program: Add Two User Inputs
 
