@@ -47,7 +47,7 @@ Input / Output Instruction Support
 | `1010` | SUI | 5 | Immediate | Subtract immediate value from accumulator |
 | `1011` | XRA | 6 | Memory | Bitwise XOR between accumulator and memory value|
 | `1100` | ANA | 6 | Memory | Bitwise AND between accumulator and memory value|
-| `1101` | INP | 6 | I/O | Load external input into accumulator |
+| `1101` | INP | 7 | I/O | Load external input into accumulator |
 | `1110` | OUT | 4 | I/O | Output accumulator to output register |
 | `1111` | HLT | 4 | Control | Halt CPU execution |
 
