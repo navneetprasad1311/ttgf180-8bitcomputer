@@ -18,12 +18,6 @@ reg [2:0] stage;
 reg running;
 reg halt;
 reg inp_wait;
-reg prev,cur;
-wire pe_st ;
-assign pe_st = ~prev & cur;
-wire pe_inp;
-reg prev_in, cur_in;
-assign pe_inp = ~prev_in & cur_in;
 always @(posedge clk or negedge reset) begin
     if(!reset) begin
         stage<=0;
@@ -31,27 +25,18 @@ always @(posedge clk or negedge reset) begin
         halt<=0;
         inp_req<=0;
         inp_wait<=0;
-        prev <=0;
-        cur <= 0;
-        prev_in <= 0; 
-        cur_in <= 0;
     end
-    else begin
-    prev <= cur;
-    cur <= start;
-    cur_in <= inp_loaded;
-    prev_in <= cur_in;
-    if(pe_st && !running && !halt && !inp_wait) begin
+    else if(start && !running && !halt && !inp_wait) begin
         running<=1;
         stage<=0;
     end
     else if(inp_wait) begin
         inp_req<=1;
-        if(pe_inp ) begin
+        if(inp_loaded) begin
             inp_wait<=0;
             inp_req<=0;
             running<=1;
-            stage<=stage+1;
+            stage<=4;
         end
     end
     else if(running && !halt) begin
@@ -65,7 +50,6 @@ always @(posedge clk or negedge reset) begin
         end
         else if(((opcode!=OP_INP)&&stage==5)||stage==6) stage<=0;
         else stage<=stage+1;
-    end
     end
 end
 always @(*) begin
@@ -187,6 +171,7 @@ always @(*) begin
             end
             else ctrl_wd = 19'b0;
         end
+        default: ctrl_wd = 19'b0;
     endcase
 end
 assign out=ctrl_wd;
