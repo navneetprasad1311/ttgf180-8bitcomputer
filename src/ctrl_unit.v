@@ -186,3 +186,4 @@ always @(*) begin
     endcase
 end
 assign out=ctrl_wd;
+endmodule
