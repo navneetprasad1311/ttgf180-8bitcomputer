@@ -26,7 +26,7 @@ always @(posedge clk or negedge reset) begin
         inp_req<=0;
         inp_wait<=0;
     end
-    else if(start && !running && !halt) begin
+    else if(start && !running && !halt && !inp_wait) begin
         running<=1;
         stage<=0;
     end
@@ -36,7 +36,7 @@ always @(posedge clk or negedge reset) begin
             inp_wait<=0;
             inp_req<=0;
             running<=1;
-            stage<=stage+1;
+            stage<=4;
         end
     end
     else if(running && !halt) begin
@@ -48,7 +48,7 @@ always @(posedge clk or negedge reset) begin
             running<=0;
             halt<=1;
         end
-        else if(stage==5) stage<=0;
+        else if(((opcode!=OP_INP)&&stage==5)||stage==6) stage<=0;
         else stage<=stage+1;
     end
 end
@@ -126,8 +126,8 @@ always @(*) begin
                     ctrl_wd[AI]=1;
                 end
                 OP_INP: begin
-                    ctrl_wd[IO]=1;
-                    ctrl_wd[MI]=1;
+                    ctrl_wd[INP]=1;
+                    ctrl_wd[AI]=1;
                 end
                 default: ctrl_wd = 19'b0;
             endcase
@@ -157,14 +157,21 @@ always @(*) begin
                     ctrl_wd[FE]=1;
                     ctrl_wd[AI]=1;
                 end
-				OP_INP: begin
-                    ctrl_wd[INP]=1;
-                    ctrl_wd[AI]=1;
-					ctrl_wd[RI]=1;
-				end
+                OP_INP: begin
+                    ctrl_wd[IO]=1;
+                    ctrl_wd[MI]=1;
+                end
                 default: ctrl_wd = 19'b0;
             endcase
         end
+        6: begin
+            if(opcode == OP_INP) begin
+                ctrl_wd[AO]=1;
+                ctrl_wd[RI]=1;
+            end
+            else ctrl_wd = 19'b0;
+        end
+        default: ctrl_wd = 19'b0;
     endcase
 end
 assign out=ctrl_wd;
