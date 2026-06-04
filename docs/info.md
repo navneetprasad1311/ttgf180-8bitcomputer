@@ -11,23 +11,23 @@ The system is fully synthesizable and suitable for both functional simulation an
 
 ## Features
 
-Custom 8-Bit CPU Architecture inspired by SAP design principles
+- Custom 8-Bit CPU Architecture inspired by SAP design principles
 
-Fully Modular RTL Design with clear separation of control and datapath
+- Fully Modular RTL Design with clear separation of control and datapath
 
-Centralized Internal Data Bus for all register and ALU transactions
+- Centralized Internal Data Bus for all register and ALU transactions
 
-Custom Instruction Set Architecture (ISA) with memory, immediate, control, and I/O instructions
+- Custom Instruction Set Architecture (ISA) with memory, immediate, control, and I/O instructions
 
-Multi-Cycle Instruction Execution using T-state based micro-operations
+- Multi-Cycle Instruction Execution using T-state based micro-operations
 
-Arithmetic and Logic Unit (ALU) supporting ADD, SUB, XOR, AND operations
+- Arithmetic and Logic Unit (ALU) supporting ADD, SUB, XOR, AND operations
 
-Flag Register Support with Zero and Carry flag updates
+- Flag Register Support with Zero and Carry flag updates
 
-Conditional and Unconditional Branching (JMP, JC, JZ instructions)
+- Conditional and Unconditional Branching (JMP, JC, JZ instructions)
 
-Input / Output Instruction Support
+- Input / Output Instruction Support
 
 ## Instruction Set Architecture 
 
