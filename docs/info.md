@@ -1,4 +1,4 @@
-# 8 Bit Computer (SAP Architecture)
+## SAP 8 Bit Computer
 
 This project implements a custom 8-bit computer inspired by the SAP (Simple-As-Possible) architecture, designed and realized entirely at the Register Transfer Level (RTL) using Verilog HDL.
 The processor is constructed using a collection of independent, well-defined hardware modules that together form a complete and functional CPU.
@@ -52,6 +52,12 @@ The system is fully synthesizable and suitable for both functional simulation an
 | `1111` | HLT | 4 | Control | Halt CPU execution |
 
 **Note:** Every instruction runs all 6 T-cycles except **INP** (7 T-cycles) . The table mentions the operation T-cycle
+
+## Verification
+
+The complete CPU design was developed and verified at the RTL level using Verilog HDL. Functional verification was performed through simulation and the design was subsequently implemented and tested on an FPGA platform to validate instruction execution, control sequencing, arithmetic and logic operations, branching behavior, memory access, and input/output functionality prior to ASIC submission.
+
+Github: https://github.com/MOHAMMEDRIYAJ/8-Bit-Computer-on-FPGA/
 
 ## How it works
 
@@ -222,3 +228,17 @@ For easier testing:
 - LEDs connected to `uo_out` and `uio_out`
 - A logic analyzer for debugging and observing execution
 - An 8-bit binary-to-7-segment decoder/display for viewing CPU outputs as decimal values
+
+## Contact
+
+* [Navneet Prasad](https://www.linkedin.com/in/navneetprasad1311)
+* [Mohammed Riyaj J](https://www.linkedin.com/in/mohammedriyaj786)
+* [Akash P](https://www.linkedin.com/in/akash-p-092423309)
+* [Vikash R](https://www.linkedin.com/in/vikashr1409)
+
+
+## Acknowledgements
+
+This project was inspired by the educational work of Albert Malvino and Ben Eater. The overall architecture and learning approach draw from the SAP (Simple-As-Possible) computer concepts presented in *Digital Computer Electronics* by Albert Malvino, as well as the practical computer-building demonstrations and educational content created by Ben Eater. Their work has been an invaluable resource in understanding computer architecture and digital system design.
+
+We would also like to acknowledge the VLSI & PCB Special Laboratory at [Bannari Amman Institute of Technology](https://www.bitsathy.ac.in/), Erode, Tamil Nadu, India, for providing a supportive environment for learning and experimentation in digital design and VLSI development. Special thanks to Professor Dr. Elango S for his guidance, encouragement, and support throughout the development of this project.
