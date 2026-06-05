@@ -57,7 +57,7 @@ The system is fully synthesizable and suitable for both functional simulation an
 
 The complete CPU design was developed and verified at the RTL level using Verilog HDL. Functional verification was performed through simulation and the design was subsequently implemented and tested on an FPGA platform to validate instruction execution, control sequencing, arithmetic and logic operations, branching behavior, memory access, and input/output functionality prior to ASIC submission.
 
-Github: https://github.com/MOHAMMEDRIYAJ/8-Bit-Computer-on-FPGA/
+**GitHub Repository:** [8-Bit Computer on FPGA](https://github.com/MOHAMMEDRIYAJ/8-Bit-Computer-on-FPGA/)
 
 ## How it works
 
@@ -231,14 +231,14 @@ For easier testing:
 
 ## Contact
 
-* [Navneet Prasad](https://www.linkedin.com/in/navneetprasad1311)
-* [Mohammed Riyaj J](https://www.linkedin.com/in/mohammedriyaj786)
-* [Akash P](https://www.linkedin.com/in/akash-p-092423309)
-* [Vikash R](https://www.linkedin.com/in/vikashr1409)
+* [Navneet Prasad](https://www.linkedin.com/in/navneetprasad1311), III year, ECE, Bannari Amman Institute of Technology
+* [Mohammed Riyaj J](https://www.linkedin.com/in/mohammedriyaj786), III year, ECE, Bannari Amman Institute of Technology
+* [Akash P](https://www.linkedin.com/in/akash-p-092423309), III year, ECE, Bannari Amman Institute of Technology
+* [Vikash R](https://www.linkedin.com/in/vikashr1409), III year, ECE, Bannari Amman Institute of Technology
 
 
 ## Acknowledgements
 
 This project was inspired by the educational work of Albert Malvino and Ben Eater. The overall architecture and learning approach draw from the SAP (Simple-As-Possible) computer concepts presented in *Digital Computer Electronics* by Albert Malvino, as well as the practical computer-building demonstrations and educational content created by Ben Eater. Their work has been an invaluable resource in understanding computer architecture and digital system design.
 
-We would also like to acknowledge the [Centre for SoC & FPGA Design Laboratory](https://www.linkedin.com/in/bit-centre-for-soc-and-fpga-design-52a50b3a3) at [Bannari Amman Institute of Technology](https://www.bitsathy.ac.in/), Erode, Tamil Nadu, India, for providing a supportive environment for learning and experimentation in digital design and VLSI development. Special thanks to Professor [Dr. Elango S](https://www.linkedin.com/in/elango-sekar-8973b958) for his guidance, encouragement, and support throughout the development of this project.
+We would also like to acknowledge the [Centre for SoC & FPGA Design Laboratory](https://www.linkedin.com/in/bit-centre-for-soc-and-fpga-design-52a50b3a3) at [Bannari Amman Institute of Technology](https://www.bitsathy.ac.in/), Erode, Tamil Nadu, India, for providing a supportive environment for learning and experimentation in digital design and VLSI development. Special thanks to [Dr. Elango S](https://www.linkedin.com/in/elango-sekar-8973b958), Associate Professor, ECE, Bannari Amman Institute of Technology for his guidance, encouragement, and support throughout the development of this project.
