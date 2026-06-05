@@ -51,7 +51,7 @@ The system is fully synthesizable and suitable for both functional simulation an
 | `1110` | OUT | 4 | I/O | Output accumulator to output register |
 | `1111` | HLT | 4 | Control | Halt CPU execution |
 
-**Note:** Every instruction runs all 6 T-cycles except **INP**(7 T-cycles) . The table mentions the operation T-cycle
+**Note:** Every instruction runs all 6 T-cycles except **INP** (7 T-cycles) . The table mentions the operation T-cycle
 
 ## How it works
 
