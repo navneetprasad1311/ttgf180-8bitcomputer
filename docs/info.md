@@ -112,7 +112,6 @@ Several status signals are exposed for debugging and monitoring:
 | `uo_out[7]` | Input request (`inp_req`) |
 | `uio_out[7:0]` | CPU output value (Program Mode) |
 
-**Note:**After Halted , apply rst_n and then restart 
 
 ## How to Test
 
