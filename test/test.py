@@ -36,8 +36,8 @@ async def test_project(dut):
 
     dut._log.info("Starting SAP CPU Test")
 
-    # 100 kHz clock
-    clock = Clock(dut.clk, 10, unit="us")
+    # 10 Hz clock
+    clock = Clock(dut.clk, 100, unit="ms")
     cocotb.start_soon(clock.start())
 
     # -------------------------
