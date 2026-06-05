@@ -111,6 +111,7 @@ Several status signals are exposed for debugging and monitoring:
 | `uo_out[7]` | Input request (`inp_req`) |
 | `uio_out[7:0]` | CPU output value (Program Mode) |
 
+**Note:**After Halted , apply rst_n and then restart 
 
 ## How to Test
 
@@ -121,7 +122,7 @@ Before programming or running the CPU:
 - Apply an **active-low reset** by driving `rst_n = 0`.
 - Release reset by setting `rst_n = 1`.
 - Always reset the design before loading a new program.
-- Use a **6 Hz clock** so execution can be observed easily.
+- Use a **10 Hz clock** so execution can be observed easily.
 - Ensure the CPU is not running while loading RAM (`prog_mode = 0`).
 
 
